@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌙 LINA MERCH - Official Store 🌙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation style merch store */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 0, 110, 0.3);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #ff006e;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero section style merch */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                radial-gradient(circle at 30% 70%, rgba(255, 0, 110, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(131, 56, 236, 0.2) 0%, transparent 50%),
+                #000;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: clamp(3em, 8vw, 8em);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: 5px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2em, 3vw, 2em);
+            color: #ff006e;
+            margin-bottom: 15px;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        .hero-description {
+            font-size: clamp(1em, 2vw, 1.3em);
+            color: #ccc;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        /* Product grid style */
+        .products-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2.5em, 5vw, 4em);
+            margin-bottom: 80px;
+            background: linear-gradient(45deg, #8338ec, #ff006e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .products-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 0 30px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.8));
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 0, 110, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255, 0, 110, 0.6);
+            box-shadow: 0 25px 60px rgba(255, 0, 110, 0.3);
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image::before {
+            transform: translateX(100%);
+        }
+
+        .product-info {
+            padding: 30px;
+        }
+
+        .product-title {
+            font-size: 1.8em;
+            color: #ff006e;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .product-description {
+            color: #ccc;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .product-price {
+            font-size: 2em;
+            color: #8338ec;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #8338ec, #ff006e);
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(131, 56, 236, 0.4);
+        }
+
+        /* Special badge */
+        .special-badge {
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Artists section redesigned */
+        .artists-section {
+            padding: 100px 0;
+            background: #000;
+            text-align: center;
+        }
+
+        .artists-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .artist-card {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid rgba(255, 0, 110, 0.3);
+            border-radius: 25px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .artist-card:hover {
+            transform: scale(1.05) rotateY(5deg);
+            border-color: rgba(131, 56, 236, 0.8);
+            box-shadow: 0 30px 80px rgba(131, 56, 236, 0.3);
+        }
+
+        .artist-name {
+            font-size: 2.2em;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        .artist-album {
+            color: #8338ec;
+            font-size: 1.2em;
+        }
+
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #ff006e;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            animation: popupIn 0.3s ease-out;
+        }
+
+        .popup-title {
+            font-size: 2em;
+            color: #ff006e;
+            margin-bottom: 20px;
+        }
+
+        .popup-text {
+            font-size: 1.2em;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .popup-btn {
+            background: linear-gradient(45deg, #8338ec, #ff006e);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @keyframes popupIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Floating elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-music {
+            position: absolute;
+            animation: float 10s ease-in-out infinite;
+            font-size: 2em;
+            color: rgba(255, 0, 110, 0.2);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(10deg); }
+            66% { transform: translateY(-15px) rotate(-5deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: 0 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+            
+            .artists-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-card {
+                margin-bottom: 20px;
+            }
+            
+            .product-info {
+                padding: 20px;
+            }
+            
+            .popup {
+                margin: 20px;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">LINA STORE</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Collection</a>
+                <a href="#" class="nav-link">Music</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating elements -->
+    <div class="floating-elements">
+        <div class="floating-music" style="top: 10%; left: 5%;">🎤</div>
+        <div class="floating-music" style="top: 30%; right: 10%;">🎵</div>
+        <div class="floating-music" style="bottom: 40%; left: 15%;">🎶</div>
+        <div class="floating-music" style="bottom: 20%; right: 5%;">🌙</div>
+        <div class="floating-music" style="top: 60%; left: 3%;">✨</div>
+        <div class="floating-music" style="top: 80%; right: 20%;">🎧</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">LINA</h1>
+            <p class="hero-subtitle">Victime de son cercle étudiant</p>
+            <div class="special-badge">18 ans • Architecture UMONS</div>
+            <p class="hero-description">Force pour les études d'architecture ! 🏗️✨<br>Collection officielle RnB </p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <h2 class="section-title">🔥 EXCLUSIVE COLLECTION 🔥</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🌟</div>
+                <div class="product-info">
+                    <h3 class="product-title">Motivation Pack</h3>
+                    <p class="product-description">J'AI PAS D'INSPI ICI HELPPPP ! 🎵</p>
+                    <div class="product-price">29.99€</div>
+                    <button class="buy-btn" onclick="showComingSoon('Motivation Pack')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">🔥</div>
+                <div class="product-info">
+                    <h3 class="product-title">PND Energy</h3>
+                    <p class="product-description">Elle veut charger à l'Umons, parfait pour survivre à l'archi ! 🌙</p>
+                    <div class="product-price">39.99€</div>
+                    <button class="buy-btn" onclick="showComingSoon('PND Energy')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">👑</div>
+                <div class="product-info">
+                    <h3 class="product-title">Future Boss Status</h3>
+                    <p class="product-description">Usine à aura askip, le futur de l'architecture lui appartient ! 💫</p>
+                    <div class="product-price">49.99€</div>
+                    <button class="buy-btn" onclick="showComingSoon('Future Boss Status')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artists Section -->
+    <section class="artists-section">
+        <h2 class="section-title">🎵 HER RNB UNIVERSE 🎵</h2>
+        <div class="artists-container">
+            <div class="artists-grid">
+                <div class="artist-card" onclick="showComingSoon('Drake Playlist')">
+                    <div class="artist-name">🦉 DRAKE 🦉</div>
+                    <div class="artist-album">Certified Lover Boy</div>
+                </div>
+                <div class="artist-card" onclick="showComingSoon('PND Playlist')">
+                    <div class="artist-name">🌙 PARTYNEXTDOOR 🌙</div>
+                    <div class="artist-album">Late Night Vibes</div>
+                </div>
+            </div>
+            <br><br>
+            <button class="buy-btn" style="max-width: 400px; margin: 0 auto; display: block;" onclick="showComingSoon('Playlist Complete')">🎧 Get The Full Playlist 🎧</button>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <h3 class="popup-title">😂 Ça arrive bientôt ! 😂</h3>
+            <p class="popup-text" id="popup-text">Cette fonctionnalité arrive bientôt mdrr, j'ai pas le temps de finir frrrrrs</p>
+            <button class="popup-btn" onclick="closePopup()">OK j'attends ! 😅</button>
+        </div>
+    </div>
+
+    <script>
+        function showComingSoon(item) {
+            const popup = document.getElementById('popup');
+            const popupText = document.getElementById('popup-text');
+            
+            const messages = [
+                `😂 ${item} Cette fonctionnalité arrive bientôt mdrr, j'ai pas le temps de finir frrrrr 🏗️`,
+                `🤣 ${item} en cours de développement ! Toujours pas le temps mais tqt bientot`,
+                `😭 ${item} pas encore dispo ! Mais elle gère déjà tout à l'UMONS askip ! ✨`,
+                `🤪 ${item} coming soon ! En mode PND vibes ! 🌙`
+            ];
+            
+            popupText.textContent = messages[Math.floor(Math.random() * messages.length)];
+            popup.style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Fermer le popup en cliquant à l'extérieur
+        document.getElementById('popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+
+        // Animations au scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-music');
+            
+            parallax.forEach((element, index) => {
+                const speed = 0.1 + (index * 0.05);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Animation d'entrée pour les cartes
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                }
+            });
+        });
+
+        document.querySelectorAll('.product-card, .artist-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
